@@ -14,10 +14,14 @@ You need Docker or Podman; the `manuscrio` command is a thin wrapper that runs t
 
 ```bash
 npm run build
-npx manuscrio@0.1.0 export ./dist --logo ./src/assets/logo.svg
+npx manuscrio@0.1.0 export ./dist --logo ./src/assets/logo.svg --theme lapis
 ```
 
 That writes one PDF per documentation edition into `./manuscrio-output`.
+
+`--theme lapis` sets the accent on top-level chapter titles and the contents table. Five themes
+ship, named for mineral pigments; the default `ink` carries no accent at all, so an unthemed manual
+stays readable printed in greyscale. See [Branding](https://manuscrio.com/docs/branding/).
 
 ### Why `--logo`
 
@@ -36,6 +40,7 @@ A navbar logo is often small; for a cover-sized mark, pass a high-resolution ass
   run: |
     npx --yes manuscrio@0.1.0 export dist \
       --logo src/assets/logo.svg \
+      --theme lapis \
       --output-dir manuscrio-output
 
 - uses: actions/upload-artifact@v7

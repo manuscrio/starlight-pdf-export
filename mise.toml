@@ -41,5 +41,6 @@ depends = ["build"]
 run = """
 npx --yes manuscrio@0.1.0 export example/dist \
   --logo example/src/assets/logo.svg \
+  --theme lapis \
   --output-dir manuscrio-output
 """
