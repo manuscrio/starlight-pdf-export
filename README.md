@@ -56,6 +56,17 @@ run](https://github.com/manuscrio/starlight-pdf-export/actions/workflows/example
 
 Copy it, or copy just the workflow.
 
+To drive it locally, the repository carries a [mise](https://mise.jdx.dev) config pinning the same
+Node version CI uses, with the commands already wired up:
+
+```bash
+mise trust     # mise asks before running a config it has not seen before
+mise install
+mise run build      # build the example site
+mise run inspect    # what manuals does this build contain?
+mise run export     # one manual per edition, with --logo
+```
+
 ## Scopes
 
 Starlight's sidebar is an explicit list with no navbar section level above it, so `--scope section`
