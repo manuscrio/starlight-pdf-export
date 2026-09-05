@@ -1,0 +1,17 @@
+{
+  "name": "orbit-docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "astro build",
+    "dev": "astro dev"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.42.0",
+    "astro": "7.3.1"
+  },
+  "engines": {
+    "node": ">=20.0"
+  }
+}
