@@ -33,15 +33,16 @@ A navbar logo is often small; for a cover-sized mark, pass a high-resolution ass
 
 ## In GitHub Actions
 
+This repository **is** a GitHub Action. Point it at the directory your build produced:
+
 ```yaml
 - run: npm ci && npm run build
 
-- name: Export the docs to PDF
-  run: |
-    npx --yes manuscrio@0.1.0 export dist \
-      --logo src/assets/logo.svg \
-      --theme lapis \
-      --output-dir manuscrio-output
+- uses: manuscrio/starlight-pdf-export@v1
+  with:
+    build: dist
+    logo: src/assets/logo.svg
+    theme: lapis
 
 - uses: actions/upload-artifact@v7
   with:
@@ -49,9 +50,21 @@ A navbar logo is often small; for a cover-sized mark, pass a high-resolution ass
     path: manuscrio-output/*.pdf
 ```
 
-[`.github/workflows/example.yml`](.github/workflows/example.yml) in this repository is the complete,
-working version of that. GitLab CI and other providers: see [Run in
-CI](https://manuscrio.com/docs/ci/).
+| Input | Default | |
+| --- | --- | --- |
+| `build` | `dist` | the directory your build produced |
+| `output-dir` | `manuscrio-output` | where the manuals are written |
+| `scope` | engine default | `edition`, `section` or `sidebar-root` |
+| `theme` | `ink` | `ink`, `lapis`, `malachite`, `garnet`, `amethyst` |
+| `logo` | — | cover and running-header mark. **Supply one**: Starlight describes no logo an exporter can read |
+| `concurrency` | `4` | parallel renders — each is a browser, so lower it on a small runner |
+| `license` | — | pass from a secret, never a committed file |
+
+[`.github/workflows/example.yml`](.github/workflows/example.yml) runs exactly this against the
+example with `uses: ./`, so CI here proves the Action itself rather than only the command it wraps.
+
+On GitLab CI or any other provider there is no Action to use — call the wrapper directly, as in
+[Try it](#try-it) above. See [Run in CI](https://manuscrio.com/docs/ci/).
 
 ## The example in this repository
 
@@ -91,7 +104,15 @@ With no licence, Manuscrio produces **complete** manuals carrying an evaluation 
 is truncated and no feature is withheld. The PDF this repository's CI publishes is watermarked,
 deliberately: a licence is a bearer token and does not belong in a public repository.
 
-See [Licensing](https://manuscrio.com/docs/licensing/) for how to supply one in a real pipeline.
+In a real pipeline, supply one from a secret:
+
+```yaml
+- uses: manuscrio/starlight-pdf-export@v1
+  with:
+    license: ${{ secrets.MANUSCRIO_LICENSE }}
+```
+
+See [Licensing](https://manuscrio.com/docs/licensing/) for how licences are issued and renewed.
 
 ## Licence
 
