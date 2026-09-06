@@ -14,7 +14,7 @@ You need Docker or Podman; the `manuscrio` command is a thin wrapper that runs t
 
 ```bash
 npm run build
-npx manuscrio@0.1.0 export ./dist --logo ./src/assets/logo.svg --theme lapis
+npx manuscrio@1.0.0 export ./dist --logo ./src/assets/logo.svg --theme lapis
 ```
 
 That writes one PDF per documentation edition into `./manuscrio-output`.
@@ -37,7 +37,7 @@ A navbar logo is often small; for a cover-sized mark, pass a high-resolution ass
 - run: npm ci && npm run build
 
 - name: Export the docs to PDF
-  run: npx --yes manuscrio@0.1.0 export dist \
+  run: npx --yes manuscrio@1.0.0 export dist \
         --logo src/assets/logo.svg \
         --theme lapis \
         --output-dir manuscrio-output
@@ -101,7 +101,7 @@ shared runner:
   env:
     MANUSCRIO_LICENSE: ${{ secrets.MANUSCRIO_LICENSE }}
   run: |
-    npx --yes manuscrio@0.1.0 export dist \
+    npx --yes manuscrio@1.0.0 export dist \
       --logo src/assets/logo.svg \
       --output-dir manuscrio-output
 ```

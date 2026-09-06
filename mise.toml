@@ -31,7 +31,7 @@ run = "npm run dev"
 [tasks.inspect]
 description = "Report what manuals the example build contains. Starlight reports an empty logo"
 depends = ["build"]
-run = "npx --yes manuscrio@0.1.0 inspect example/dist"
+run = "npx --yes manuscrio@1.0.0 inspect example/dist"
 
 # --logo is not optional here. Starlight does not describe its logo in the built markup in a way
 # an exporter can read, so without it the manual carries no mark at all.
@@ -39,7 +39,7 @@ run = "npx --yes manuscrio@0.1.0 inspect example/dist"
 description = "Export the example build to PDF manuals, one per edition"
 depends = ["build"]
 run = """
-npx --yes manuscrio@0.1.0 export example/dist \
+npx --yes manuscrio@1.0.0 export example/dist \
   --logo example/src/assets/logo.svg \
   --theme lapis \
   --output-dir manuscrio-output
